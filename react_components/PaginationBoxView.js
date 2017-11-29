@@ -47,9 +47,7 @@ export default class PaginationBoxView extends Component {
     nextLabel             : "Next",
     breakLabel            : "...",
     disabledClassName     : "disabled",
-    disableInitialCallback: false,
-    baseTagName           : 'ul',
-    insideTagName         : 'li',
+    disableInitialCallback: false
   };
 
   constructor(props) {
@@ -199,18 +197,8 @@ export default class PaginationBoxView extends Component {
   render() {
     let disabled = this.props.disabledClassName;
 
-    const previousClasses = classNames(this.props.previousClassName,
-                                       {[disabled]: this.state.selected === 0});
-
-    const nextClasses = classNames(this.props.nextClassName,
-                                   {[disabled]: this.state.selected === this.props.pageCount - 1});
-
-    const BaseTag = this.props.baseTagName;
-    const InsideTag = this.props.insideTagName;
-
     return (
-      <BaseTag className={this.props.containerClassName}>
-        <InsideTag className={previousClasses}>
+      <div className={this.props.containerClassName}>
           <a onClick={this.handlePreviousPage}
              className={this.props.previousLinkClassName}
              href={this.hrefBuilder(this.state.selected - 1)}
@@ -218,11 +206,9 @@ export default class PaginationBoxView extends Component {
              onKeyPress={this.handlePreviousPage}>
             {this.props.previousLabel}
           </a>
-        </InsideTag>
 
         {createFragment(this.pagination())}
 
-        <InsideTag className={nextClasses}>
           <a onClick={this.handleNextPage}
              className={this.props.nextLinkClassName}
              href={this.hrefBuilder(this.state.selected + 1)}
@@ -230,8 +216,7 @@ export default class PaginationBoxView extends Component {
              onKeyPress={this.handleNextPage}>
             {this.props.nextLabel}
           </a>
-        </InsideTag>
-      </BaseTag>
+      </div>
     );
   }
 };
