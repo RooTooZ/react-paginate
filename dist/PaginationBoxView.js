@@ -32,8 +32,6 @@ var _BreakView2 = _interopRequireDefault(_BreakView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -190,42 +188,27 @@ var PaginationBoxView = function (_Component) {
     value: function render() {
       var disabled = this.props.disabledClassName;
 
-      var previousClasses = (0, _classnames2.default)(this.props.previousClassName, _defineProperty({}, disabled, this.state.selected === 0));
-
-      var nextClasses = (0, _classnames2.default)(this.props.nextClassName, _defineProperty({}, disabled, this.state.selected === this.props.pageCount - 1));
-
-      var BaseTag = this.props.baseTagName;
-      var InsideTag = this.props.insideTagName;
-
       return _react2.default.createElement(
-        BaseTag,
+        'div',
         { className: this.props.containerClassName },
         _react2.default.createElement(
-          InsideTag,
-          { className: previousClasses },
-          _react2.default.createElement(
-            'a',
-            { onClick: this.handlePreviousPage,
-              className: this.props.previousLinkClassName,
-              href: this.hrefBuilder(this.state.selected - 1),
-              tabIndex: '0',
-              onKeyPress: this.handlePreviousPage },
-            this.props.previousLabel
-          )
+          'a',
+          { onClick: this.handlePreviousPage,
+            className: this.props.previousLinkClassName,
+            href: this.hrefBuilder(this.state.selected - 1),
+            tabIndex: '0',
+            onKeyPress: this.handlePreviousPage },
+          this.props.previousLabel
         ),
         (0, _reactAddonsCreateFragment2.default)(this.pagination()),
         _react2.default.createElement(
-          InsideTag,
-          { className: nextClasses },
-          _react2.default.createElement(
-            'a',
-            { onClick: this.handleNextPage,
-              className: this.props.nextLinkClassName,
-              href: this.hrefBuilder(this.state.selected + 1),
-              tabIndex: '0',
-              onKeyPress: this.handleNextPage },
-            this.props.nextLabel
-          )
+          'a',
+          { onClick: this.handleNextPage,
+            className: this.props.nextLinkClassName,
+            href: this.hrefBuilder(this.state.selected + 1),
+            tabIndex: '0',
+            onKeyPress: this.handleNextPage },
+          this.props.nextLabel
         )
       );
     }
@@ -270,9 +253,7 @@ PaginationBoxView.defaultProps = {
   nextLabel: "Next",
   breakLabel: "...",
   disabledClassName: "disabled",
-  disableInitialCallback: false,
-  baseTagName: 'ul',
-  insideTagName: 'li'
+  disableInitialCallback: false
 };
 exports.default = PaginationBoxView;
 ;
