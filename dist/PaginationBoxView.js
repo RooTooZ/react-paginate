@@ -194,11 +194,14 @@ var PaginationBoxView = function (_Component) {
 
       var nextClasses = (0, _classnames2.default)(this.props.nextClassName, _defineProperty({}, disabled, this.state.selected === this.props.pageCount - 1));
 
+      var BaseTag = this.props.baseTagName;
+      var InsideTag = this.props.insideTagName;
+
       return _react2.default.createElement(
-        'ul',
+        BaseTag,
         { className: this.props.containerClassName },
         _react2.default.createElement(
-          'li',
+          InsideTag,
           { className: previousClasses },
           _react2.default.createElement(
             'a',
@@ -212,7 +215,7 @@ var PaginationBoxView = function (_Component) {
         ),
         (0, _reactAddonsCreateFragment2.default)(this.pagination()),
         _react2.default.createElement(
-          'li',
+          InsideTag,
           { className: nextClasses },
           _react2.default.createElement(
             'a',
@@ -252,7 +255,9 @@ PaginationBoxView.propTypes = {
   previousLinkClassName: _propTypes2.default.string,
   nextLinkClassName: _propTypes2.default.string,
   disabledClassName: _propTypes2.default.string,
-  breakClassName: _propTypes2.default.string
+  breakClassName: _propTypes2.default.string,
+  baseTagName: _propTypes2.default.string,
+  insideTagName: _propTypes2.default.string
 };
 PaginationBoxView.defaultProps = {
   pageCount: 10,
@@ -265,7 +270,9 @@ PaginationBoxView.defaultProps = {
   nextLabel: "Next",
   breakLabel: "...",
   disabledClassName: "disabled",
-  disableInitialCallback: false
+  disableInitialCallback: false,
+  baseTagName: 'ul',
+  insideTagName: 'li'
 };
 exports.default = PaginationBoxView;
 ;

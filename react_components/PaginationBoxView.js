@@ -31,7 +31,9 @@ export default class PaginationBoxView extends Component {
     previousLinkClassName : PropTypes.string,
     nextLinkClassName     : PropTypes.string,
     disabledClassName     : PropTypes.string,
-    breakClassName        : PropTypes.string
+    breakClassName        : PropTypes.string,
+    baseTagName           : PropTypes.string,
+    insideTagName         : PropTypes.string
   };
 
   static defaultProps = {
@@ -45,7 +47,9 @@ export default class PaginationBoxView extends Component {
     nextLabel             : "Next",
     breakLabel            : "...",
     disabledClassName     : "disabled",
-    disableInitialCallback: false
+    disableInitialCallback: false,
+    baseTagName           : 'ul',
+    insideTagName         : 'li',
   };
 
   constructor(props) {
@@ -201,9 +205,12 @@ export default class PaginationBoxView extends Component {
     const nextClasses = classNames(this.props.nextClassName,
                                    {[disabled]: this.state.selected === this.props.pageCount - 1});
 
+    const BaseTag = this.props.baseTagName;
+    const InsideTag = this.props.insideTagName;
+
     return (
-      <ul className={this.props.containerClassName}>
-        <li className={previousClasses}>
+      <BaseTag className={this.props.containerClassName}>
+        <InsideTag className={previousClasses}>
           <a onClick={this.handlePreviousPage}
              className={this.props.previousLinkClassName}
              href={this.hrefBuilder(this.state.selected - 1)}
@@ -211,11 +218,11 @@ export default class PaginationBoxView extends Component {
              onKeyPress={this.handlePreviousPage}>
             {this.props.previousLabel}
           </a>
-        </li>
+        </InsideTag>
 
         {createFragment(this.pagination())}
 
-        <li className={nextClasses}>
+        <InsideTag className={nextClasses}>
           <a onClick={this.handleNextPage}
              className={this.props.nextLinkClassName}
              href={this.hrefBuilder(this.state.selected + 1)}
@@ -223,8 +230,8 @@ export default class PaginationBoxView extends Component {
              onKeyPress={this.handleNextPage}>
             {this.props.nextLabel}
           </a>
-        </li>
-      </ul>
+        </InsideTag>
+      </BaseTag>
     );
   }
 };
